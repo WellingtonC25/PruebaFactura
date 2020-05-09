@@ -1,0 +1,54 @@
+﻿@model PruebaFactura.ViewModel.CompraViewModel
+@{
+    ViewData["Title"] = "Comprar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .Caja {
+        margin: 20px auto;
+        width: 80%;
+        box-shadow: 0 2px 3px #ccc;
+        border: 1px solid #eee;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    
+</style>
+
+<h1>Comprar</h1>
+<form asp-action="Comprar">
+    <div class="Caja">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <label asp-for="NombreCliente">Nombre</label>
+                <input class="form-control" type="text" placeholder="Nombre" asp-for="NombreCliente" />
+                <label asp-for="Direccion"> Direccion </label>
+                <input class="form-control" type="text" placeholder="Direccion" asp-for="Direccion" />
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                @for (int i = 0; i < Model.Productos.Count(); i++)
+                {
+                <div style="flex-direction:column;align-content:center;margin:auto">
+                    <label>
+                        @Model.Productos[i].Nombre
+                        <input type="checkbox" asp-for="Productos[i].Comprar" />
+                    </label>
+                    <input type="hidden" asp-for="Productos[i].Nombre" value="@Model.Productos[i].Nombre" />
+                    <input type="hidden" asp-for="Productos[i].Precio" value="@Model.Productos[i].Precio" />
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <button style="width:150px;margin:auto" class="btn btn-success">Comprar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,68 @@
+﻿@model PruebaFactura.ViewModel.VisualizarFacturaViewModel
+@{
+    ViewData["Title"] = "VisualizarFactura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>VisualizarFactura</h1>
+
+<style>
+    .Caja {
+        margin: 20px auto;
+        width: 100%;
+        box-shadow: 0 2px 3px #ccc;
+        border: 1px solid #eee;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+</style>
+
+<h1>Comprar</h1>
+<form asp-action="Comprar">
+    <div class="Caja">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <label>Nombre:</label><strong>@Model.Encabezado.NombreCliente</strong>
+                <label>Direccion:</label><strong>@Model.Encabezado.DireccionCliente</strong>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <label>Fecha:</label><strong>@DateTime.Now</strong>
+                <label>Codigo factura:</label>HRT<strong>@Model.Encabezado.CodigoFactura</strong>
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var detalle in Model.Detalle)
+                    {
+                        <tr>
+                            <th>@detalle.NombreProducto</th>
+                            <td>Venta de auto</td>
+                            <td>@detalle.PrecioProducto</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+         
+            <label style="float:right">Total:  <strong>@Model.Encabezado.TotalCompra</strong></label>
+
+        </div>
+
+    </div>
+
+
+</form>
